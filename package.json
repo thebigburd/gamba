@@ -1,0 +1,24 @@
+{
+  "name": "gamba",
+  "version": "1.0.0",
+  "description": "Discord Casino Games Bot",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --require ts-node/register \"test/**/*.ts\""
+  },
+  "author": "thebigburd",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.1.3",
+    "discord.js": "^14.3.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1"
+  }
+}

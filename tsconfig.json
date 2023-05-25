@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      /* Language */
+      "target": "es6",
+      "module": "commonjs",
+      "outDir": "dist",
+      "sourceMap": true,
+
+      /* Interop Constraints */
+      "esModuleInterop": true
+    },
+    
+    /* Directories */
+    "include": [
+      "src/**/*.ts",
+      "test/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+  }
