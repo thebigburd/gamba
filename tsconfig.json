@@ -13,8 +13,8 @@
     /* Directories */
     "include": [
       "src/**/*.ts",
-      "test/**/*.ts"
-    ],
+      "test/**/*.ts", 
+      "deploy-commands.ts"    ],
     "exclude": [
       "node_modules"
     ],
