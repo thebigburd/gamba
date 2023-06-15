@@ -1,23 +1,22 @@
-import { Card } from "../card/Card";
 import { CardImpl } from "../card/CardImpl";
 import { Deck } from "./Deck";
 
 
 export class DeckImpl implements Deck {
 
-	cards: Card[];
+	cards: CardImpl[];
 	currentIndex: number;
 
-	constructor(cards: Card[], currentIndex: number) {
+	constructor(cards: CardImpl[], currentIndex: number) {
 		this.cards = cards;
 		this.currentIndex = currentIndex;
 	}
 
 	/**
      * Draw the top card of the deck.
-     * @returns {Card}
+     * @returns {CardImpl}
      */
-	drawCard(): Card {
+	drawCard(): CardImpl {
 		// If the last card has been drawn.
 		if (this.currentIndex >= this.cards.length) {
 			this.shuffle();
@@ -54,7 +53,7 @@ export class DeckImpl implements Deck {
      * Adds the given card to the bottom of the deck.
      * @param card
      */
-	addCard(card: Card) {
+	addCard(card: CardImpl) {
 		this.cards.push(card);
 	}
 
@@ -63,7 +62,7 @@ export class DeckImpl implements Deck {
      *  @returns {void}
      */
 	addCards(): void {
-		const ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+		const ranks = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
 		const suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 
 		for (const rank of ranks) {
