@@ -86,9 +86,3 @@ export function testDeck(Deck: DeckConstructor) {
 		});
 	});
 }
-
-// Create an instance of DeckImpl constructor
-const DeckImplConstructor = DeckImpl as DeckConstructor;
-
-// Call the testDeck function with the DeckImpl constructor
-testDeck(DeckImplConstructor);

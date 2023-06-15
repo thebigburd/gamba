@@ -48,10 +48,3 @@ export function testCard(Card: CardConstructor) {
 		});
 	});
 }
-
-
-// Create an instance of CardImpl constructor
-const cardImplConstructor = CardImpl as CardConstructor;
-
-// Call the testCard function with the CardImpl constructor
-testCard(cardImplConstructor);
