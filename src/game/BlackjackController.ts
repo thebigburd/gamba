@@ -158,7 +158,7 @@ export class BlackjackController implements GameController {
 		}
 
 		if (dealerVal > 21) {
-			return ("Dealer has busted. Player wins.");
+			return ("Dealer has busted. Player wins!");
 		}
 
 		if (playerVal === dealerVal) {
