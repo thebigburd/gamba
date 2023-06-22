@@ -9,17 +9,12 @@ export class Bot {
 	public commands = new Collection<string, Command>();
 
 	public constructor(private client: Client) {
+		// Retrieve Commands for Client
+		this.retrieveSlashCommands();
+		// Retrieve Listeners
+		this.retrieveEventHandlers();
+
 		this.login(process.env.TOKEN);
-
-		// When the client is ready, run this code (only once)
-		// We use 'c' for the event parameter to keep it separate from the already defined 'client'
-		client.once(Events.ClientReady, c => {
-			// Retrieve Commands for Client
-			this.retrieveSlashCommands();
-			this.retrieveHandlers();
-
-			console.log(`Ready! Logged in as ${c.user.tag}`);
-		});
 	}
 
 
@@ -56,31 +51,21 @@ export class Bot {
 		}
 	}
 
-	private async retrieveHandlers() {
-		this.client.on(Events.InteractionCreate, async interaction => {
-			if (!interaction.isChatInputCommand()) return;
+	private async retrieveEventHandlers() {
+		const eventsPath = path.join(__dirname, "events");
+		const eventsFolder = fs.readdirSync(eventsPath);
 
-			console.log(interaction);
-			const command = this.commands.get(interaction.commandName);
+		for (const file of eventsFolder) {
+			const filePath = path.join(eventsPath, file);
+			const event = await import(filePath);
+			if (event.once) {
+				this.client.once(event.name, (...args) => event.execute(...args));
+			}
+			else {
+				this.client.on(event.name, (...args) => event.execute(...args));
+			}
+		}
 
-			if (!command) {
-				console.error(`No command matching ${interaction.commandName} was found.`);
-				return;
-			}
-
-			try {
-				await command.execute(interaction);
-			}
-			catch (error) {
-				console.error(error);
-				if (interaction.replied || interaction.deferred) {
-					await interaction.followUp({ content: "There was an error while executing this command!", ephemeral: true });
-				}
-				else {
-					await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
-				}
-			}
-		});
 	}
 
 }
