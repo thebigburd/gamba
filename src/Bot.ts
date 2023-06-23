@@ -1,22 +1,24 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 // Require the necessary discord.js classes
-import { Client, Collection, Events } from "discord.js";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
 import "dotenv/config";
 import { Command } from "./interfaces/Command";
+import { DiscordClient } from "./modules/DiscordClient";
 
 export class Bot {
-	public commands = new Collection<string, Command>();
+	private client = new DiscordClient({ intents: [GatewayIntentBits.Guilds] });
 
-	public constructor(private client: Client) {
+	public constructor() {
+		this.client.commands = new Collection();
 		// Retrieve Commands for Client
 		this.retrieveSlashCommands();
 		// Retrieve Listeners
 		this.retrieveEventHandlers();
 
 		this.login(process.env.TOKEN);
-	}
 
+	}
 
 	private async login(token: string): Promise<void> {
 		try {
@@ -42,7 +44,7 @@ export class Bot {
 				const command = await import(filePath);
 				// Set a new item in the Collection with the key as the command name and the value as the exported module
 				if ("data" in command && "execute" in command) {
-					this.commands.set(command.data.name, command);
+					this.client.commands.set(command.data.name, command);
 				}
 				else {
 					console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);

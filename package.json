@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "test": "mocha --require ts-node/register \"test/**/*.ts\""
+    "test": "mocha --require ts-node/register \"test/**/*.ts\"",
+    "deploycommands": "ts-node deploy-commands.ts"
   },
   "author": "thebigburd",
   "license": "ISC",
