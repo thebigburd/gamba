@@ -37,7 +37,7 @@ export class Bot {
 		// Check all folders under commands
 		for (const folder of commandFolders) {
 			const commandsPath = path.join(foldersPath, folder);
-			const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
+			const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts") || file.endsWith(".js"));
 			// Check all command files
 			for (const file of commandFiles) {
 				const filePath = path.join(commandsPath, file);
