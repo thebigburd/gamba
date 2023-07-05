@@ -154,11 +154,11 @@ export class BlackjackController implements GameController {
 		const dealerVal = this.getHandValue(this.dealerHand);
 
 		if (playerVal > 21) {
-			return ("Player has busted. Dealer wins.");
+			return ("You have busted. Dealer wins.");
 		}
 
 		if (dealerVal > 21) {
-			return ("Dealer has busted. Player wins!");
+			return ("Dealer has busted. You won!");
 		}
 
 		if (playerVal === dealerVal) {
@@ -166,7 +166,7 @@ export class BlackjackController implements GameController {
 		}
 
 		if (playerVal > dealerVal) {
-			return ("Player wins!");
+			return ("You won!");
 		}
 
 		return ("Dealer wins.");
