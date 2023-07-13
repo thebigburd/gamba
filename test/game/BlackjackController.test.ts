@@ -45,7 +45,7 @@ describe("Blackjack Controller Test", () => {
 		expect(() => game.hit()).to.throw(Error, "It is not the player's turn.");
 	});
 
-	it("Should return the 'Player has busted. Dealer wins.' if player busts from hitting", () => {
+	it("Should return the 'You have busted. Dealer wins.' if player busts from hitting", () => {
 		// Setup
 		const game = new BlackjackController(1);
 		game.startGame();
@@ -58,7 +58,7 @@ describe("Blackjack Controller Test", () => {
 
 		// Assert
 		expect(game.gameState).to.equal("RESULT");
-		expect(result).to.equal("Player has busted. Dealer wins.");
+		expect(result).to.equal("You have busted. Dealer wins.");
 	});
 
 	it("Should update GAMESTATE to 'RESULT' and update dealer's hand when player stands.", () => {
@@ -89,7 +89,7 @@ describe("Blackjack Controller Test", () => {
 		}
 	});
 
-	it("should return 'Dealer has busted. Player wins!' if Dealer busts from drawing", () => {
+	it("should return 'Dealer has busted. You won!' if Dealer busts from drawing", () => {
 		// Setup
 		// Create mocks
 		const deckImplMock: DeckImpl = mock(DeckImpl);
@@ -117,7 +117,7 @@ describe("Blackjack Controller Test", () => {
 		const result = game.getResult();
 		const dealerHand = game.getDealerHand();
 		expect(game.getHandValue(dealerHand)).to.be.greaterThan(21);
-		expect(result).to.equal("Dealer has busted. Player wins!");
+		expect(result).to.equal("Dealer has busted. You won!");
 	});
 
 	it("should return 'Draw' if player and dealer have the same hand value", () => {
@@ -151,7 +151,7 @@ describe("Blackjack Controller Test", () => {
 		expect(result).to.equal("Draw.");
 	});
 
-	it("should return 'Player wins!' if player has a higher hand value than dealer", () => {
+	it("should return 'You won!' if player has a higher hand value than dealer", () => {
 		// Setup
 		// Create mocks
 		const deckImplMock: DeckImpl = mock(DeckImpl);
@@ -179,7 +179,7 @@ describe("Blackjack Controller Test", () => {
 		const playerHand = game.getPlayerHand();
 		const dealerHand = game.getDealerHand();
 		expect(game.getHandValue(playerHand)).to.be.greaterThan(game.getHandValue(dealerHand));
-		expect(result).to.equal("Player wins!");
+		expect(result).to.equal("You won!");
 	});
 
 	it("should return 'Dealer wins.' if dealer has a higher hand value than player", () => {

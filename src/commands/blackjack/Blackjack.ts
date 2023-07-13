@@ -48,7 +48,7 @@ module.exports = {
 		const collectorFilter = i => i.user.id === interaction.user.id;
 
 		try {
-			const collector = response.createMessageComponentCollector({ filter: collectorFilter, componentType: ComponentType.Button, time: 36000 });
+			const collector = response.createMessageComponentCollector({ filter: collectorFilter, componentType: ComponentType.Button, time: 180_000 });
 
 			collector.on("collect", i => {
 				if (i.customId === "hit-button") {
