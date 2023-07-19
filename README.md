@@ -75,11 +75,11 @@ Please submit an issue on the [repository](https://github.com/thebigburd/gamba/i
 
 ## Roadmap
 
-- DockerFile
-
 - Currency System
 
 - Further blackjack mechanics such as Natural payout multiplier
+
+- DockerFile 
 
 - Higher/Lower Card Game
 
