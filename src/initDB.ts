@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { sequelize } from "./modules/Sequelize";
-import User from "./models/User";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const User = require("./models/User");
 
 
 (async () => {
@@ -13,6 +14,7 @@ import User from "./models/User";
 	}
 
 	try {
+		console.log(sequelize.models);
 		const force = process.argv.includes("--force") || process.argv.includes("-f");
 		// Synchronize the models with the database
 		// Set 'force' to true to drop the table if it already exists (be cautious with this option in production)

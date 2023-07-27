@@ -1,33 +1,26 @@
-import { DataTypes, Model } from "sequelize";
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 import { sequelize } from "../modules/Sequelize";
 
 
-interface UserAttributes {
-	id: number;
-	name: string;
-	balance: number;
-  }
-
-class User extends Model<UserAttributes> {
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: number;
-	declare name: string;
 	declare balance: number;
+	declare dailyClaim: CreationOptional<Date>;
 }
 
 User.init(
 	{
 		id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.INTEGER.UNSIGNED,
 			primaryKey: true,
-			autoIncrement: true,
-		},
-		name: {
-			type: DataTypes.STRING,
-			allowNull: false,
+			unique: true,
 		},
 		balance: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
+		},
+		dailyClaim: {
+			type: DataTypes.DATE,
 		},
 	},
 	// Options
@@ -35,6 +28,7 @@ User.init(
 		sequelize,
 		tableName: "Users",
 		timestamps: false,
-	});
+	},
+);
 
 export default User;
