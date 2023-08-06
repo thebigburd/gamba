@@ -3,7 +3,7 @@ import { sequelize } from "../modules/Sequelize";
 
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
-	declare id: number;
+	declare id: string;
 	declare balance: number;
 	declare dailyClaim: CreationOptional<Date>;
 }
@@ -11,7 +11,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 User.init(
 	{
 		id: {
-			type: DataTypes.INTEGER.UNSIGNED,
+			type: DataTypes.STRING,
 			primaryKey: true,
 			unique: true,
 		},

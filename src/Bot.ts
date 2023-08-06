@@ -1,10 +1,11 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 // Require the necessary discord.js classes
-import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { Collection, GatewayIntentBits } from "discord.js";
 import "dotenv/config";
 import { Command } from "./interfaces/Command";
 import { DiscordClient } from "./modules/DiscordClient";
+import { EconomyManagerImpl } from "./EconomyManagerImpl";
 
 export class Bot {
 	private client = new DiscordClient({ intents: [GatewayIntentBits.Guilds] });
@@ -15,6 +16,9 @@ export class Bot {
 		this.retrieveSlashCommands();
 		// Retrieve Listeners
 		this.retrieveEventHandlers();
+		// Start Economy Manager
+		this.client.economyManager = EconomyManagerImpl.getInstance();
+
 
 		this.login(process.env.TOKEN);
 
