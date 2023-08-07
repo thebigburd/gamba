@@ -10,7 +10,15 @@ const GAMESTATE = {
 	RESULT: "RESULT",
 } as const;
 
+const WINTYPE = {
+	WIN: "WIN",
+	DRAW: "DRAW",
+	LOSE: "LOSE",
+	NATURAL: "NATWIN",
+} as const;
+
 type GameState = typeof GAMESTATE[keyof typeof GAMESTATE]
+type WinType = typeof WINTYPE[keyof typeof WINTYPE]
 
 export class BlackjackController implements GameController {
 
@@ -21,6 +29,7 @@ export class BlackjackController implements GameController {
 	private dealerHand: CardImpl[];
 	private hiddenCard: CardImpl;
 	gameState: GameState;
+	winType: WinType;
 
 	constructor(deckCount: number) {
 		this.maxplayers = 4;
@@ -31,6 +40,7 @@ export class BlackjackController implements GameController {
 		this.dealerHand = [];
 		this.playerHand = [];
 		this.gameState = GAMESTATE.START;
+		this.winType = WINTYPE.LOSE;
 	}
 
 	startGame(): void {
@@ -84,6 +94,10 @@ export class BlackjackController implements GameController {
 
 	getGameState(): GameState {
 		return this.gameState;
+	}
+
+	getWinType(): WinType {
+		return this.winType;
 	}
 
 	getCardValue(card: CardImpl): number {
@@ -158,14 +172,17 @@ export class BlackjackController implements GameController {
 		}
 
 		if (dealerVal > 21) {
+			this.winType = WINTYPE.WIN;
 			return ("Dealer has busted. You won!");
 		}
 
 		if (playerVal === dealerVal) {
+			this.winType = WINTYPE.DRAW;
 			return ("Draw.");
 		}
 
 		if (playerVal > dealerVal) {
+			this.winType = WINTYPE.WIN;
 			return ("You won!");
 		}
 
