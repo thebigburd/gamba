@@ -50,6 +50,27 @@ export class EconomyManagerImpl implements EconomyManager {
 		}
 	}
 
+	async saveCache() {
+		try {
+			this.balanceCache.forEach(async u => {
+				const user = u;
+				const userId = u.id;
+				const balance = user.balance;
+				await User.update (
+					{ balance: balance },
+					{
+						where: {
+							id: userId,
+						},
+					},
+				);
+			});
+		}
+		catch (error) {
+			console.log("Error saving cache to database.");
+		}
+	}
+
 	getCache() {
 		return this.balanceCache;
 	}

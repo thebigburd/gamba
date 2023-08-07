@@ -75,9 +75,7 @@ Please submit an issue on the [repository](https://github.com/thebigburd/gamba/i
 
 ## Roadmap
 
-- Currency System
-
-- Further blackjack mechanics such as Natural payout multiplier
+- Further blackjack mechanics such as Natural multiplier, Split, Double-down.
 
 - DockerFile 
 
