@@ -3,6 +3,10 @@
 
 Gamba is a locally-hosted open source bot that allows you to play games such as Blackjack within a Discord channel. 
 
+
+https://github.com/thebigburd/gamba/assets/55106453/c5d11503-04e4-4145-92af-d061606f1021
+
+
 ## Setup Environment
 
 Clone the project
