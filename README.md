@@ -1,5 +1,5 @@
 
-# Gamba - The Discord Card Games Bot.
+# Gamba v1.1.1 - The Discord Card Games Bot.
 
 Gamba is a locally-hosted open source bot that allows you to play games such as Blackjack within a Discord channel. 
 
@@ -21,7 +21,7 @@ Go to the project directory
   cd gamba
 ```
 
-Install dependencies
+Install dependencies. If using Docker this is not required.
 
 ```bash
   npm install
@@ -38,6 +38,11 @@ To deploy this project fill the .env file with the following details and remove 
 
 `GUILDID`
 
+`DBHOST`
+
+`DBUSER`
+
+`DBPASS`
 
 TOKEN: Your application's Bot Token ([Discord Developer Portal](https://discord.com/developers/applications) > "Bot" > Token)
 
@@ -45,18 +50,54 @@ CLIENTID: Your application's client id ([Discord Developer Portal](https://disco
 
 GUILDID: Your Discord server's id (Enable developer mode > Right-click the server title > "Copy ID")
 
+Lastly Database Credentials of your database server. DBHOST=localhost should be used if running locally instead of DBHOST=db.
 
-Then run the following command in your terminal to register the commands.
+ If using Docker, these can be left as is, or any value you wish as the database container uses these credentials.
+
+## Running Locally
+
+Then run the following commands in your terminal.
+
+Deploy the commands to the Discord server. This only needs to be done once, or if you ever modify a command.
 
 ```bash
   npm run deploycommands
 ```
 
-To launch the bot in Discord run:
+Then to initialise the Users table in the database.
+
+```bash
+  npm run initDB
+```
+
+Finally launch the bot in Discord:
 
 ```bash
   npm start
 ```
+And that is all, the bot should be up and running in your server!
+
+## Running with Docker
+
+If using Docker, build the containers.
+
+```bash
+    docker compose up -d
+```
+Deploy the commands to the Discord server by running the following script in the gamba-bot's terminal. This only needs to be done once, or if you ever modify a command.
+
+```bash
+  npm run deploycommands
+```
+
+Then initialise the Users table in the database, by running in the gamba-bot's terminal again:
+
+```bash
+    npm run initDB
+```
+
+
+The bot should now be up and running in your server!
 
 ## FAQ
 
@@ -65,13 +106,26 @@ To launch the bot in Discord run:
 
 There will be more games to play in the future. Check out the Roadmap section. Updates may take some time as this is my first time delving into Discord Bot development as well as Javascript/Typescript as a language.
 
-#### What's the point of card games if there's nothing at stake?
-
-Currency System is coming in the near future. Currency will be obtainable through staking in the games, but obviously there'll need to be a way for users to get the currency to stake to begin with. 
 
 #### Are there plans to host the Bot online?
 
 It's a possibility but, as of now, there are no plans to do so. The bot hasn't been tested on a large scale so I'm not entirely sure how that will fair.
+
+#### When running the Bot locally, why do none of the Economy commands work?
+
+In the .env file, make sure to switch the database host to localhost.
+
+` DBHOST=localhost`
+
+#### When deploying the Bot with Docker, why do none of the Economy commands work?
+
+When the application is deployed for the first time, you need to run in the gamba bot container's terminal:
+
+```bash
+    npm run initDB
+```
+
+This will set up the Users table in the database. You do not need to do this every time you run the container, only for the first time.
 
 #### I encountered an issue/bug with the Bot. Where can I report it?
 
@@ -79,11 +133,9 @@ Please submit an issue on the [repository](https://github.com/thebigburd/gamba/i
 
 ## Roadmap
 
-- Further blackjack mechanics such as Natural multiplier, Split, Double-down.
-
-- DockerFile 
-
 - Higher/Lower Card Game
+
+- Further blackjack mechanics such as Natural multiplier, Split, Double-down.
 
 - Other card games including multiplayer ones.
 
