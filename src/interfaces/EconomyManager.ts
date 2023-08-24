@@ -7,8 +7,8 @@ export interface EconomyManager {
 
 	getBalance(id) : number;
 
-	addBalance(id, amount) : number;
+	addBalance(id, amount);
 
-	setBalance(id, number) : number;
+	setBalance(id, number);
 
 }

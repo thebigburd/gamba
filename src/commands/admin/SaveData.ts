@@ -5,7 +5,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("savedata")
 		.setDescription("Saves Cached Data to the Database.")
-		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 	category: "admin",
 	cooldown: 60,
 	async execute(interaction) {

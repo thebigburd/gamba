@@ -23,10 +23,24 @@ export class EconomyManagerImpl implements EconomyManager {
 		return user ? user.balance : 0;
 	}
 
-	addBalance(id: string, amount: number): number {
+	async addBalance(id: string, amount: number) {
 		const user = this.balanceCache.get(id);
 		user.balance += amount;
 		this.balanceCache.set(id, user);
+		try {
+			await User.update (
+				{ balance: user.balance },
+				{
+					where: {
+						id: id,
+					},
+				},
+			);
+		}
+		catch (e) {
+			console.log(`Failed to update balance in database: ${e}`);
+		}
+
 
 		return this.getBalance(id);
 	}
