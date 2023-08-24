@@ -1,0 +1,14 @@
+# Persisted Data
+pgdata
+
+# Packages
+node_modules
+
+# Git repository
+docs
+.env.example
+README.md
+
+# Dev Environment
+.eslintrc.json
+test

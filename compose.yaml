@@ -1,0 +1,24 @@
+services: 
+  bot: 
+    build: .
+    restart: always
+    depends_on:
+      - db
+  db:
+    container_name: postgres-db
+    image: postgres:15.4-alpine3.17
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DBUSER}
+      - POSTGRES_PASSWORD=${DBPASS}
+      - POSTGRES_DB=${DATABASE}
+    restart: always
+    volumes: 
+      - ./pgdata:/var/lib/postgresql/data
+    ports: 
+      - "5432:5432"
+
+volumes:
+  pgdata: 
+  

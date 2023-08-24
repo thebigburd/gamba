@@ -3,8 +3,7 @@ import { Sequelize } from "sequelize";
 
 // Database Connection Params
 export const sequelize = new Sequelize(`${process.env.DATABASE}`, `${process.env.DBUSER}`, `${process.env.DBPASS}`, {
-	host: "localhost",
+	host: `${process.env.DBHOST}`,
 	dialect: "postgres",
-	port: Number(process.env.PORT),
 	logging: console.log,
 });
