@@ -49,7 +49,7 @@ module.exports = {
 				.setLabel("Stand")
 				.setStyle(ButtonStyle.Secondary);
 
-			let row = new ActionRowBuilder<ButtonBuilder>()
+			const row = new ActionRowBuilder<ButtonBuilder>()
 				.addComponents(hitButton, standButton);
 
 			// The Embed displaying the game state that the bot will send to the channel.
@@ -62,7 +62,7 @@ module.exports = {
 					{ name: "Total", value: `${game.getHandValue(game.getPlayerHand())}` },
 				);
 
-			let response = await interaction.reply({ embeds: [gameDisplay], components: [row] });
+			const response = await interaction.reply({ embeds: [gameDisplay], components: [row] });
 
 			// Filter only allows the user who used the slash command to interact with it.
 			const collectorFilter = i => i.user.id === interaction.user.id;
