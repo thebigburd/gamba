@@ -25,6 +25,7 @@ export class HighLowController implements GameController {
 	private playerCard: CardImpl;
 	private nextCard: CardImpl;
 	private streak: number;
+	// The multiplier is the return on each win.
 	private multiplier: number;
 
 	constructor(deckCount: number, multiplier) {
@@ -116,6 +117,10 @@ export class HighLowController implements GameController {
 		return ("Incorrect. You have lost!");
 	}
 
+	getWinType(): WinType {
+		return this.winType;
+	}
+
 	getPlayerCard(): CardImpl {
 		return this.playerCard;
 	}
@@ -130,6 +135,14 @@ export class HighLowController implements GameController {
 
 	setStreak(num: number) {
 		this.streak = num;
+	}
+
+	getGameState() {
+		return this.gameState;
+	}
+
+	getMultiplier() {
+		return this.multiplier;
 	}
 
 	getPlayingDeck(): DeckImpl {
