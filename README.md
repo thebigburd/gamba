@@ -1,5 +1,5 @@
 
-# Gamba v1.1.1 - The Discord Card Games Bot.
+# Gamba v2.0.0 - The Discord Card Games Bot.
 
 Gamba is a locally-hosted open source bot that allows you to play games such as Blackjack within a Discord channel. 
 
@@ -102,9 +102,9 @@ The bot should now be up and running in your server!
 ## FAQ
 
 
-#### Why can I only play Blackjack?
+#### Will there be more games to play?
 
-There will be more games to play in the future. Check out the Roadmap section. Updates may take some time as this is my first time delving into Discord Bot development as well as Javascript/Typescript as a language.
+There will be more games to play in the future. Perhaps even non-card games. Check out the Roadmap section. Updates may take some time as this is my first time delving into Discord Bot development as well as Javascript/Typescript as a language.
 
 
 #### Are there plans to host the Bot online?
@@ -132,8 +132,9 @@ This will set up the Users table in the database. You do not need to do this eve
 Please submit an issue on the [repository](https://github.com/thebigburd/gamba/issues), and I'll look into it as soon as possible.
 
 ## Roadmap
+While the Roadmap shows features that I'll be working on at some point, it may change if I believe there is something of higher priority to do.
 
-- Higher/Lower Card Game
+- Improved User Experience / QoL
 
 - Further blackjack mechanics such as Natural multiplier, Split, Double-down.
 
