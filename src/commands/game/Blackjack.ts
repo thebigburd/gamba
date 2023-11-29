@@ -82,7 +82,7 @@ module.exports = {
 							i.reply("There is no game running. Use /blackjack to start a new game!");
 							break;
 						default:
-							i.followUp({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
+							i.reply({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
 							break;
 						}
 					}
@@ -97,7 +97,7 @@ module.exports = {
 							i.reply("There is no game running. Use /blackjack to start a new game!");
 							break;
 						default:
-							i.followUp({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
+							i.reply({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
 							break;
 						}
 					}

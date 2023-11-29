@@ -88,7 +88,7 @@ module.exports = {
 							i.reply("There is no game running. Use /highlow to start a new game!");
 							break;
 						default:
-							i.followUp({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
+							i.reply({ content: `These buttons aren't for you, ${i.user.username}!`, ephemeral: true });
 							break;
 						}
 					}
@@ -103,7 +103,7 @@ module.exports = {
 							i.reply("There is no game running. Use /highlow to start a new game!");
 							break;
 						default:
-							i.followUp({ content: `It's not your turn, ${i.user.username}!`, ephemeral: true });
+							i.reply({ content: `These buttons aren't for you, ${i.user.username}!`, ephemeral: true });
 							break;
 						}
 					}
@@ -119,9 +119,11 @@ module.exports = {
 							game.surrender();
 							updateGameDisplay();
 							break;
-						default:
-							i.followUp({ content: "There is no game running. Use /highlow to start a new game!" });
+						case "RESULT":
+							i.reply({ content: "There is no game running. Use /highlow to start a new game!" });
 							break;
+						default:
+							i.reply({ content: `These buttons aren't for you!, ${i.user.username}!`, ephemeral: true });
 						}
 					}
 					else if (i.customId === "continue-button") {
@@ -131,8 +133,11 @@ module.exports = {
 							game.continue();
 							updateGameDisplay();
 							break;
+						case "RESULT":
+							i.reply({ content: "There is no game running. Use /highlow to start a new game!" });
+							break;
 						default:
-							i.followUp({ content: "There is no game running. Use /highlow to start a new game!" });
+							i.reply({ content: `These buttons aren't for you!, ${i.user.username}!`, ephemeral: true });
 						}
 					}
 					else {
