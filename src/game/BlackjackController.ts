@@ -58,7 +58,7 @@ export class BlackjackController implements GameController {
 
 	hit(): void {
 		if (this.gameState !== GAMESTATE.PLAYER) {
-			throw new Error("It is not the player's turn.");
+			throw new Error("Hit failed. It is not the player's turn.");
 		}
 
 		this.playerHand.push(this.playingDeck.drawCard());
@@ -70,7 +70,7 @@ export class BlackjackController implements GameController {
 
 	stand(): void {
 		if (this.gameState !== GAMESTATE.PLAYER) {
-			throw new Error("It is not the player's turn.");
+			throw new Error("Stand failed. It is not the player's turn.");
 		}
 
 		this.gameState = GAMESTATE.DEALER;

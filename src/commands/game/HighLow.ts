@@ -119,6 +119,11 @@ module.exports = {
 							game.surrender();
 							updateGameDisplay();
 							break;
+						case "PUSH":
+							i.deferUpdate();
+							game.surrender();
+							updateGameDisplay();
+							break;
 						case "RESULT":
 							i.reply({ content: "There is no game running. Use /highlow to start a new game!" });
 							break;
@@ -129,6 +134,11 @@ module.exports = {
 					else if (i.customId === "continue-button") {
 						switch (game.getGameState()) {
 						case "CORRECT":
+							i.deferUpdate();
+							game.continue();
+							updateGameDisplay();
+							break;
+						case "PUSH":
 							i.deferUpdate();
 							game.continue();
 							updateGameDisplay();
@@ -186,6 +196,32 @@ module.exports = {
 
 					await response.edit({ embeds: [newGameDisplay], components: [decisionRow] });
 				}
+				else if (state === "PUSH") {
+					const continueButton = new ButtonBuilder()
+						.setCustomId("continue-button")
+						.setLabel("Continue")
+						.setStyle(ButtonStyle.Primary);
+
+					const leaveButton = new ButtonBuilder()
+						.setCustomId("leave-button")
+						.setLabel("Leave")
+						.setStyle(ButtonStyle.Secondary);
+
+					const decisionRow = new ActionRowBuilder<ButtonBuilder>()
+						.addComponents(continueButton, leaveButton);
+
+					const newGameDisplay = new EmbedBuilder()
+						.setTitle(`${player}'s Higher or Lower Game.`)
+						.setDescription("Draw.")
+						.addFields(
+							{ name: "Current Card", value: `${game.getNextCard().getCardName()}` },
+							{ name: "Pot", value: `${pot}` },
+							{ name: "Current Streak", value: `${game.getStreak()}` },
+							{ name: "Decision", value: "Continue or Leave with the Full Pot?" },
+						);
+
+					await response.edit({ embeds: [newGameDisplay], components: [decisionRow] });
+				}
 				// Player Chooses to Carry On
 				else if (state === "PLAYER") {
 					const newGameDisplay = new EmbedBuilder()
@@ -218,17 +254,17 @@ module.exports = {
 							if (winType === "WIN") {
 								economyManager.addBalance(userId, pot);
 								channel.send({ content: `${result}`, ephemeral: true });
-								channel.send(`**${player} has won a ${pot} pot with a ${game.getStreak()} streak!**`);
+								channel.send(`**${player} has won a ${pot} pot with a ${game.getStreak()} winstreak!**`);
 							}
 							else if (winType === "SURRENDER") {
 								const winnings = Math.ceil(pot / 2);
 								economyManager.addBalance(userId, winnings);
 								channel.send({ content: `${result}`, ephemeral: true });
-								channel.send(`**${player} has won a ${winnings} pot with a ${game.getStreak()} streak!**`);
+								channel.send(`**${player} has won a ${winnings} pot with a ${game.getStreak()} winstreak!**`);
 							}
 							else {
 								channel.send({ content: `${result}`, ephemeral: true });
-								channel.send(`${player} loses a ${pot} pot after a ${game.getStreak()} streak.`);
+								channel.send(`${player} loses a ${pot} pot after a ${game.getStreak()} winstreak.`);
 							}
 						})
 						.catch((error) => {

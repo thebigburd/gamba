@@ -5,6 +5,7 @@ import { GameController } from "./GameController";
 const GAMESTATE = {
 	PLAYER: "PLAYER",
 	CORRECT: "CORRECT",
+	PUSH: "PUSH",
 	RESULT: "RESULT",
 } as const;
 
@@ -67,6 +68,11 @@ export class HighLowController implements GameController {
 			this.streak += 1;
 			this.gameState = GAMESTATE.CORRECT;
 		}
+		// If next card is the same as the player's card
+		else if (cardValue === nextCardValue) {
+			this.streak += 1;
+			this.gameState = GAMESTATE.PUSH;
+		}
 		else {
 			this.gameState = GAMESTATE.RESULT;
 			this.winType = WINTYPE.LOSE;
@@ -74,8 +80,8 @@ export class HighLowController implements GameController {
 	}
 
 	continue() {
-		if (this.gameState !== GAMESTATE.CORRECT) {
-			throw new Error("It is not time to decide. This option should not be available.");
+		if (this.gameState !== GAMESTATE.CORRECT && this.gameState !== GAMESTATE.PUSH) {
+			throw new Error("Continue option should not be available. It is not time to decide. ");
 		}
 
 		// Resets and shuffles the deck after 10 Wins to prevent Card Counting.
@@ -92,7 +98,7 @@ export class HighLowController implements GameController {
 	}
 
 	surrender() {
-		if (this.gameState === GAMESTATE.CORRECT) {
+		if (this.gameState === GAMESTATE.CORRECT || this.gameState === GAMESTATE.PUSH) {
 			this.winType = WINTYPE.WIN;
 			this.gameState = GAMESTATE.RESULT;
 		}
@@ -101,7 +107,7 @@ export class HighLowController implements GameController {
 			this.gameState = GAMESTATE.RESULT;
 		}
 		else {
-			throw new Error("This option shold not be available. It is not time to decide.");
+			throw new Error("Surrender option shold not be available. It is not time to decide.");
 		}
 	}
 

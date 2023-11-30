@@ -1,5 +1,5 @@
 
-# Gamba v2.0.1 - The Discord Card Games Bot.
+# Gamba v2.1.0 - The Discord Card Games Bot.
 
 Gamba is a locally-hosted open source bot that allows you to play games such as Blackjack within a Discord channel. 
 

@@ -57,6 +57,31 @@ describe("High Low Controller Test", () => {
 		expect(game.getStreak()).to.be.equal(1);
 	});
 
+	it("Should change the Game State to PUSH, and increment streak, if the next card is equal to the player's card.", () => {
+		// Setup
+		// Create mocks
+		const deckImplMock: DeckImpl = mock(DeckImpl);
+		const deckInstance = instance(deckImplMock);
+
+		// Stub the Draw Card method of mock.
+		when(deckImplMock.drawCard())
+			.thenReturn(new CardImpl("Five", "Clubs"))
+			.thenReturn(new CardImpl("Five", "Hearts"));
+
+		// Create the game instance with the mocked deck
+		const game = new HighLowController(1, 0.3);
+		game["playingDeck"] = deckInstance;
+
+		game.startGame();
+
+		// Act
+		game.playerAct(false);
+
+		// Assert
+		expect(game.gameState).to.equal("PUSH");
+		expect(game.getStreak()).to.be.equal(1);
+	});
+
 	it("Should change the Game State to RESULT, and Win Type to LOSE, if the player predicts incorrectly that the next card is higher.", () => {
 		// Setup
 		// Create mocks
