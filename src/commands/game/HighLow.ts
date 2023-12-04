@@ -87,9 +87,6 @@ module.exports = {
 						case "RESULT":
 							i.reply("There is no game running. Use /highlow to start a new game!");
 							break;
-						default:
-							i.reply({ content: `These buttons aren't for you, ${i.user.username}!`, ephemeral: true });
-							break;
 						}
 					}
 					else if (i.customId === "low-button") {
@@ -102,52 +99,30 @@ module.exports = {
 						case "RESULT":
 							i.reply("There is no game running. Use /highlow to start a new game!");
 							break;
-						default:
-							i.reply({ content: `These buttons aren't for you, ${i.user.username}!`, ephemeral: true });
-							break;
 						}
 					}
 					else if (i.customId === "leave-button" || i.customId === "surrender-button") {
 						switch (game.getGameState()) {
-						case "CORRECT":
-							i.deferUpdate();
-							game.surrender();
-							updateGameDisplay();
-							break;
-						case "PLAYER":
-							i.deferUpdate();
-							game.surrender();
-							updateGameDisplay();
-							break;
-						case "PUSH":
-							i.deferUpdate();
-							game.surrender();
-							updateGameDisplay();
-							break;
 						case "RESULT":
 							i.reply({ content: "There is no game running. Use /highlow to start a new game!" });
 							break;
 						default:
-							i.reply({ content: `These buttons aren't for you!, ${i.user.username}!`, ephemeral: true });
+							i.deferUpdate();
+							game.surrender();
+							updateGameDisplay();
+							break;
 						}
 					}
 					else if (i.customId === "continue-button") {
 						switch (game.getGameState()) {
-						case "CORRECT":
-							i.deferUpdate();
-							game.continue();
-							updateGameDisplay();
-							break;
-						case "PUSH":
-							i.deferUpdate();
-							game.continue();
-							updateGameDisplay();
-							break;
 						case "RESULT":
 							i.reply({ content: "There is no game running. Use /highlow to start a new game!" });
 							break;
 						default:
-							i.reply({ content: `These buttons aren't for you!, ${i.user.username}!`, ephemeral: true });
+							i.deferUpdate();
+							game.continue();
+							updateGameDisplay();
+							break;
 						}
 					}
 					else {
