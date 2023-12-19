@@ -1,6 +1,6 @@
 {
   "name": "gamba",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Discord Casino Games Bot",
   "main": "src/index.ts",
   "directories": {
